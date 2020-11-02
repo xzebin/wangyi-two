@@ -56,6 +56,33 @@
   </div>
 </template>
 <script>
+function detectZoom (){
+  var ratio = 0,
+    screen = window.screen,
+    ua = navigator.userAgent.toLowerCase();
+
+  if (window.devicePixelRatio !== undefined) {
+    ratio = window.devicePixelRatio;
+  }
+  else if (~ua.indexOf('msie')) {
+    if (screen.deviceXDPI && screen.logicalXDPI) {
+      ratio = screen.deviceXDPI / screen.logicalXDPI;
+    }
+  }
+  else if (window.outerWidth !== undefined && window.innerWidth !== undefined) {
+    ratio = window.outerWidth / window.innerWidth;
+  }
+
+  if (ratio){
+    ratio = Math.round(ratio * 100);
+  }
+
+  return ratio;
+}
+let zoo = detectZoom();
+if(zoo != 100){
+  alert("请将屏幕缩放至100%体验是最佳的");
+}
 import { getLyricsById, searchSongByName } from "./route.js";
 import "./static/icon-style.css";
 var map = new Map();
@@ -79,6 +106,9 @@ export default {
   },
   mounted() {
     this.test();
+  },
+  created() {
+    
   },
   methods: {
     //选歌
