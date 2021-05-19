@@ -3,22 +3,20 @@
     <div class="hasData">
       <el-table
         :data="searchDatas"
-        height="670px"
+        height="100%"
         style="width: 100%"
       >
         <el-table-column
           prop="name"
           row-key="name"
           label="单曲"
-          width="180"
         ></el-table-column>
         <el-table-column
           prop="artists[0].name"
           label="歌手"
-          width="180"
         ></el-table-column>
         <el-table-column prop="album.name" label="主播电台"></el-table-column>
-        <el-table-column fixed="right" label="操作" width="100">
+        <el-table-column fixed="right" label="操作">
           <template slot-scope="scope">
             <el-button @click.stop="playNow(scope.row)" type="text" size="small"
               >播放</el-button
@@ -43,6 +41,7 @@ export default {
       this.$emit("next_song", obj);
     },
     async playNow(row){
+      console.log(row);
       let songId = row.id;
       let res = await getSongBySongId(songId);
       let url = res.url;
@@ -59,6 +58,9 @@ export default {
 </script>
 
 <style scoped>
+.hasData{
+  height: 100%;
+}
 img {
   width: 30px;
 }

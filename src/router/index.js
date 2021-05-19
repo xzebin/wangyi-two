@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import search from "../components/Search.vue";
 import lyric from "../components/Lyric.vue";
 import index from "../components/index.vue";
-import app from "../App.vue";
+import info from "../components/Info.vue";
 
 const originalPush = VueRouter.prototype.push
 
@@ -14,8 +14,6 @@ VueRouter.prototype.push = function push(location) {
 
 //将vue路由安装到Vue身上
 Vue.use(VueRouter);
-
-
 // 创建路由对象
 var router = new VueRouter({
     routes: [
@@ -30,6 +28,10 @@ var router = new VueRouter({
         {
             path: "/lyric",
             component:lyric
+        },
+        {
+            path: "/info",
+            component:info
         }
     ]
 })
